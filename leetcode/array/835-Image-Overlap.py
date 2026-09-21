@@ -1,17 +1,25 @@
 class Solution:
     def largestOverlap(self, img1: list[list[int]], img2: list[list[int]]) -> int:
         n=len(img1)
+        ones1=[]
+        ones2=[]
         maxi=0
-        for row_shift in range(-(n-1),n):
-            for col_shift in range(-(n-1),n):
-                overlap=0
-                for i in range(n):
-                    for j in range(n):
-                        new_row=i+row_shift
-                        new_col=j+col_shift
-                        if 0<=new_row<n and 0<=new_col<n:
-                            if img1[i][j]==1 and img2[new_row][new_col]==1:
-                                overlap+=1
-                maxi=max(maxi,overlap)
+        for i in range(n):
+            for j in range(n):
+                if img1[i][j]==1:
+                    ones1.append((i,j))
+                if img2[i][j]==1:
+                    ones2.append((i,j))
+        shift=Counter()
+        for i1,j1 in ones1:
+            for i2,j2 in ones2:
+                row_shift=i2-i1
+                col_shift=j2-j1
+                shift[(row_shift,col_shift)]+=1
+        if shift:
+            maxi=max(shift.values())
         return maxi
+
+
+
         
