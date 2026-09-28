@@ -1,18 +1,20 @@
 class Solution:
     def asteroidCollision(self, asteroids: list[int]) -> list[int]:
-        i = 0
-        while i < len(asteroids) - 1:
-            if asteroids[i] > 0 and asteroids[i+1] < 0:
-                if abs(asteroids[i])>abs(asteroids[i+1]):
-                    asteroids.pop(i+1)
-                elif abs(asteroids[i])<abs(asteroids[i+1]):
-                    asteroids.pop(i)
-                    i=max(0,i-1)
+        st=[]
+        for cur in asteroids:
+            alive=True
+            while st and st[-1]>0 and cur<0:
+                if abs(st[-1])<abs(cur):
+                    st.pop()
+                elif abs(st[-1])>abs(cur):
+                    alive=False
+                    break
                 else:
-                    asteroids.pop(i+1)
-                    asteroids.pop(i)
-                    i=max(0,i-1)
-            else:
-                i+=1
-        return asteroids
+                    st.pop()
+                    alive=False
+                    break
+            if alive:
+                st.append(cur)
+        return st
+
         
