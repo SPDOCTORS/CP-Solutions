@@ -1,12 +1,13 @@
 class Solution:
     def finalPrices(self, prices: list[int]) -> list[int]:
-        n=len(prices)
         result=prices.copy()
-        for i in range(n):
-            for j in range(i+1,n):
-                if prices[j]<=prices[i]:
-                    result[i]=prices[i]-prices[j]
-                    break
+        st=[]
+        for i in range(len(prices)-1,-1,-1):
+            while st and prices[st[-1]]>prices[i]:
+                st.pop()
+            if st:
+                result[i]=prices[i]-prices[st[-1]]
+            st.append(i)
         return result
 
         
