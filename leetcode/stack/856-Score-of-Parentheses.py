@@ -1,11 +1,12 @@
 class Solution:
     def scoreOfParentheses(self, s: str) -> int:
-        stack=[0]
-        for c in s:
+        score=0
+        balance=0
+        for i,c in enumerate(s) :
             if c=="(":
-                stack.append(0)
+                balance+=1
             else:
-                v=stack[-1]
-                stack.pop()
-                stack[-1]=stack[-1]+max(2*v,1)
-        return stack[-1]       
+                balance-=1
+                if s[i-1]=="(":                
+                    score+=1<<balance
+        return score
