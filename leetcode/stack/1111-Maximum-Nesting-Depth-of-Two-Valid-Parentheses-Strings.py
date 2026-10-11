@@ -1,13 +1,10 @@
 class Solution:
     def maxDepthAfterSplit(self, seq: str) -> list[int]:
-        depth=0
         ans=[]
-        for c in seq:
-            if c=="(":
-                depth+=1
-                ans.append(depth%2)
+        for i,ch in enumerate(seq):
+            if ch=="(":
+                ans.append(i%2)
             else:
-                ans.append(depth%2)
-                depth-=1
+                ans.append(1-i%2)
         return ans
         
