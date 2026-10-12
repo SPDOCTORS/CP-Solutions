@@ -3,7 +3,7 @@ class Solution:
         mod=10**9+7
         cnt=[0]*31
         for num in nums:
-            for i in range(30):
+            for i in range(31):
                 if num&(1<<i):
                     cnt[i]+=1
         ans=0
