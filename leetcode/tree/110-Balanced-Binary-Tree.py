@@ -5,18 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def height(self,root):
-        if root is None:
-            return 0
-        left=self.height(root.left)
-        right=self.height(root.right)
-        return 1+max(left,right)
     def isBalanced(self, root: TreeNode | None) -> bool:
-        if root is None:
-            return True
-        leftH=self.height(root.left)
-        rightH=self.height(root.right)
-        if abs(leftH-rightH)>1:
-            return False
-        return self.isBalanced(root.left) and self.isBalanced(root.right)
+        def dfs(root):
+            if root is None:
+                return 0
+            leftH=dfs(root.left)
+            if leftH==-1:
+                return -1
+            rightH=dfs(root.right)
+            if rightH==-1:
+                return -1
+            if abs(leftH-rightH)>1:
+                return -1
+            return 1+max(leftH,rightH)
+        return dfs(root)!=-1
         
