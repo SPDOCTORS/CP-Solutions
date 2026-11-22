@@ -11,14 +11,14 @@ class Solution:
         ans=[]
         q=deque([root])
         while q:
-            level=[]
-            for i in range(len(q)):
+            size=len(q)
+            for i in range(size):
                 node=q.popleft()
-                level.append(node.val)
+                if i==size-1:
+                    ans.append(node.val)
                 if node.left:
                     q.append(node.left)
                 if node.right:
                     q.append(node.right)
-            ans.append(level[-1])
         return ans
         
